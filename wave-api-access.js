@@ -26,23 +26,22 @@ async function main() {
     const client = new MongoClient(process.env.MONGO_DB_URI);
 
     //formatting data for websites
-    var webData = await import(process.env.ALL_DOMAINS_30_DAYS, {
+    var webData = await import(process.env.ALL_DOMAINS, {
         assert: { type: "json" },
     });
     webData = webData.default;
 
-    var credNum = 4;
+    var credNum = 966;
     var fedURL = "";
-    var reportType = 1;
-    console.log(process.env.API_KEY)
+    var reportType = 2;
+    var lastIndex = 247;
 
     try {
         await client.connect();
 
-        for (var i = 0; i < credNum; i++) { // TBD: handle how many credits each request takes
+        for (var i = lastIndex; i < lastIndex + (credNum / reportType); i++) {
             fedURL = webData[i].domain;
             url = `https://wave.webaim.org/api/request?key=${process.env.API_KEY}&url=${fedURL}&reporttype=${reportType}`;
-            reportType++;
             console.log(url);
 
             var newData = await getAPI(url);
