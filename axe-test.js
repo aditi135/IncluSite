@@ -25,7 +25,7 @@ async function main() {
     const results = await new AxeBuilder(driver).analyze();
     console.log(results);
 
-    await addData(client, JSON.parse("{}"));
+    await addData(client, results);
   } catch (e) {
       console.error(e);
   } finally {
@@ -36,3 +36,6 @@ async function main() {
 }
 
 main();
+
+// Source(s): 
+// https://www.npmjs.com/package/@axe-core/webdriverjs
