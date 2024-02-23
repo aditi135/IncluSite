@@ -1,6 +1,5 @@
 require("dotenv").config();
 
-
 const { AxeBuilder } = require("@axe-core/webdriverjs");
 const { Builder } = require("selenium-webdriver");
 const chrome = require("selenium-webdriver/chrome");
@@ -18,14 +17,23 @@ async function main() {
     .forBrowser("chrome")
     .setChromeOptions(new chrome.Options())
     .build();
+
+  var webData = await import("/Users/jiagill/Documents/VSCode/IncluSite/CodaAda/all-domains-30-days.json", {
+    assert: { type: "json" },
+  });
+  webData = webData.default;
   
   try {
     await client.connect();
-    await driver.get("https://www.noaa.gov/");
-    const results = await new AxeBuilder(driver).analyze();
-    console.log(results);
 
-    await addData(client, results);
+    for (var i = 0; i < Object.keys(webData).length; i++) {
+      await driver.get(webData[i].domain);
+      const results = await new AxeBuilder(driver).analyze();
+      console.log(results);
+
+      await addData(client, results);
+    }
+
   } catch (e) {
       console.error(e);
   } finally {
