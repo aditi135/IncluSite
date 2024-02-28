@@ -22,14 +22,26 @@ async function main() {
     assert: { type: "json" },
   });
   webData = webData.default;
+  var countInsecure = 0;
+  var countFail = 0;
   
   try {
     await client.connect();
 
     for (var i = 0; i < Object.keys(webData).length; i++) {
-      await driver.get(webData[i].domain);
+      try {
+        await driver.get("https://" + webData[i].domain);
+      } catch (e) {
+        try {
+          await driver.get("http://" + webData[i].domain);
+          countInsecure++;
+        } catch (e) {
+          countFail++;
+          continue;
+        }
+      }
+      
       const results = await new AxeBuilder(driver).analyze();
-      console.log(results);
 
       await addData(client, results);
     }
@@ -41,6 +53,10 @@ async function main() {
   }
 
   await driver.quit();
+  console.log();
+  console.log("FINAL REPORT: ");
+  console.log(`Insecure websites: ${countInsecure}`);
+  console.log(`Failed API accesses: ${countFail}`);
 }
 
 main();
