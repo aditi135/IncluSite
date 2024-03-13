@@ -65,7 +65,7 @@ async function formatAxeData(client, url) {
 }
 
 async function main() {
-    const client = new MongoClient("mongodb+srv://jiasg2:aJkuNzDYvD9rfkMh@wavefedwebsitedata.tnc4kdt.mongodb.net/");//process.env.MONGO_DB_URI);
+    const client = new MongoClient(process.env.MONGO_DB_URI);
     var test_url_axe = "https:\/\/www.noaa.gov\/";
     try {
         await client.connect();
