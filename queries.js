@@ -1,13 +1,7 @@
 require("dotenv").config();
 const {MongoClient} = require("mongodb");
 
-async function findWebsiteAxeCore(client, url) {
-    const result = await client.db(process.env.DB_NAME).collection(process.env.COLLECTION_NAME)
-                               .findOne({url : url});
-    return result;
-}
-
-async function findLeastViolations(client, url) {
+async function printSummary(client, url) {
     // currently just prints a summary; can use numbers as wanted later
     const data = await client.db(process.env.DB_NAME).collection(process.env.COLLECTION_NAME)
                        .findOne({url : url});
@@ -43,14 +37,42 @@ async function findLeastViolations(client, url) {
     console.log("-------------------------------------------");
 }
 
+async function formatAxeData(client, url) {
+    const data = await client.db(process.env.DB_NAME).collection(process.env.COLLECTION_NAME)
+                       .findOne({url : url});
+    var result = JSON.parse("{}");
+    result.url = url;
+    result.passes_count = data.passes.length;
+    result.incompletes_count = data.incomplete.length;
+    result.violations_count = data.violations.length;
+    result.list_of_elems = []
+    for (var i = 0; i < result.passes_count; i++) {
+        // .replaceAll used because JSON doesn't support "-"
+        result[data.passes[i].id.replaceAll("-", "_")] = "pass";
+        result.list_of_elems.push(data.passes[i].id.replaceAll("-", "_"));
+    }
+    for (var i = 0; i < result.incompletes_count; i++) {
+        result[data.incomplete[i].id.replaceAll("-", "_")] = "incomplete";
+        result[data.violations[i].id.replaceAll("-", "_")].type = data.violations[i].impact;
+        result.list_of_elems.push(data.passes[i].id.replaceAll("-", "_"));
+    }
+    for (var i = 0; i < result.violations_count; i++) {
+        result[data.violations[i].id.replaceAll("-", "_")] = "violation";
+        result[data.violations[i].id.replaceAll("-", "_")].type = data.violations[i].impact;
+        result.list_of_elems.push(data.passes[i].id.replaceAll("-", "_"));
+    }
+    return result;
+}
+
 async function main() {
-    const client = new MongoClient(process.env.MONGO_DB_URI);
+    const client = new MongoClient("mongodb+srv://jiasg2:aJkuNzDYvD9rfkMh@wavefedwebsitedata.tnc4kdt.mongodb.net/");//process.env.MONGO_DB_URI);
     var test_url_axe = "https:\/\/www.noaa.gov\/";
     try {
         await client.connect();
-        // const result = await findWebsiteAxeCore(client, test_url_axe);
-        // console.log(result);
-        await findLeastViolations(client, test_url_axe);
+        // await printSummary(client, test_url_axe);
+        var data = await formatAxeData(client, test_url_axe);  
+        console.log(data);
+        console.log(data["url"]);
     } catch (e) {
         console.error(e);
     } finally {
