@@ -9,8 +9,11 @@ async function addData(client, newData) {
 }
 
 async function formatAxeData(client, url) {
-    const data = await client.db(process.env.DB_NAME).collection(process.env.COLLECTION_NAME_AXE_UPDATED)
+    const data = await client.db(process.env.DB_NAME).collection(process.env.COLLECTION_NAME)
                        .findOne({url : url});
+    if (data == null) {
+        return null;
+    }
     var result = JSON.parse("{}");
     result.url = url;
     result.passes_count = data.passes.length;
@@ -39,9 +42,11 @@ async function main() {
     const client = new MongoClient(process.env.MONGO_DB_URI);
   
     try {
-      await client.connect();
-      // const results = await new AxeBuilder(driver).analyze();
-      // await addData(client, results);
+        var webData = await import("./CodeAda/all-domains-30-days.json", {
+            assert: { type: "json" },
+        });
+        webData = webData.default;
+        console.log(webData.length);
     } catch (e) {
         console.error(e);
     } finally {
