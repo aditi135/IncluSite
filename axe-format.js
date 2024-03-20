@@ -18,24 +18,24 @@ async function formatAxeData(client, URL) {
     var result = JSON.parse("{}");
     result.url = URL;
     result.url_dom = data.url;
-    result.passes_count = data.passes.length;
-    result.incompletes_count = data.incomplete.length;
-    result.violations_count = data.violations.length;
+    result.pass_count = data.passes.length;
+    result.incomplete_count = data.incomplete.length;
+    result.violation_count = data.violations.length;
     result.list_of_elems = []
     try {
-        for (var i = 0; i < result.passes_count; i++) {
+        for (var i = 0; i < result.pass_count; i++) {
             // .replaceAll used because JSON doesn't support "-"
             result[data.passes[i].id.replaceAll("-", "_")] = "pass";
             result.list_of_elems.push(data.passes[i].id.replaceAll("-", "_"));
         }
-        for (var i = 0; i < result.incompletes_count; i++) {
+        for (var i = 0; i < result.incompletescount; i++) {
             // .replaceAll used because JSON doesn't support "-"
             result[data.incomplete[i].id.replaceAll("-", "_")] = "incomplete";//_" + data.incomplete[i].impact;
             result.list_of_elems.push(data.passes[i].id.replaceAll("-", "_"));
         }
-        for (var i = 0; i < result.violations_count; i++) {
+        for (var i = 0; i < result.violation_count; i++) {
             // .replaceAll used because JSON doesn't support "-"
-            result[data.violations[i].id.replaceAll("-", "_")] = "violation_";//" + data.incomplete[i].impact;
+            result[data.violations[i].id.replaceAll("-", "_")] = "violation";//" + data.incomplete[i].impact;
             result.list_of_elems.push(data.passes[i].id.replaceAll("-", "_"));
         }
     } catch (e) {
@@ -56,6 +56,8 @@ async function main() {
   
     try {
         await client.connect();
+
+        url_list = [];
         
         for (let i = 0; i < webData.length; i++) {
             const data = await formatAxeData(client, webData[i].domain);
@@ -63,7 +65,10 @@ async function main() {
                 continue;
             }
             await addData(client, data);
+            url_list.push(webData[i].domain);
         }
+
+        await addData(client, {name: "URL_LIST", url_list: url_list});
     } catch (e) {
         console.error(e);
     } finally {

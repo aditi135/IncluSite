@@ -27,6 +27,7 @@ async function main() {
   
   try {
     await client.connect();
+    // client.db(process.env.DB_NAME).collection(process.env.COLLECTION_NAME).deleteMany();
 
     for (var i = 0; i < Object.keys(webData).length; i++) {
       try {
