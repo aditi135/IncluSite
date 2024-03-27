@@ -19,7 +19,7 @@ async function searchData(client, string) {
     return search_results;
 }
 
-async function filterData(search_results, filters) {
+async function filterData(search_results, filters=[]) {
     search_results.sort(function(a, b) {
         a_score = 0;
         b_score = 0;
@@ -60,9 +60,10 @@ async function main() {
         console.log();
         console.log();
         console.log();
-        query_data = filterData(query_data, ["color_contrast"]);
 
         console.log(query_data);
+        query_data = filterData(query_data, ["color_contrast"]);
+
 
         // console.log(url_data);
         console.log(query_data);
