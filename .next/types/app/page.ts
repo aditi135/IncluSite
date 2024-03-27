@@ -1,4 +1,4 @@
-// File: C:\Users\reach\Desktop\DevAda\IncluSite\app\page.js
+// File: /Users/jiagill/Documents/VSCode/IncluSite/app/page.js
 import * as entry from '../../../app/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
