@@ -8,15 +8,21 @@ async function findURLData(client, URL) {
 }
 
 async function searchData(client, string) {
-    const data = await client.db(process.env.DB_NAME).collection(process.env.COLLECTION_NAME_AXE_UPDATED)
+    const raw_results = await client.db(process.env.DB_NAME).collection(process.env.COLLECTION_NAME_AXE_UPDATED)
                              .find({url : {$regex: string}});
-    return data.toArray();
+    const search_results = raw_results.toArray();
+    search_results.sort(function(a, b) {
+        a_score = a.pass_count / (a.pass_count + a.incomplete_count + a.violation_count); // DECISION: prioritize GENERAL or FILTERED accessibility? maybe let them pick?
+        b_score = b.pass_count / (b.pass_count + b.incomplete_count + b.violation_count);
+        return b_score - a_score;
+    });
+    return search_results;
 }
 
 async function filterData(search_results, filters) {
     search_results.sort(function(a, b) {
-        a_score = a.pass_count / (a.pass_count + a.incomplete_count + a.violation_count); // DECISION: prioritize GENERAL or FILTERED accessibility? maybe let them pick?
-        b_score = b.pass_count / (b.pass_count + b.incomplete_count + b.violation_count);
+        a_score = 0;
+        b_score = 0;
         for (var i = 0; i < filters.length; i++) {
             try {
                 if (a[filters[i]] == "pass") {
