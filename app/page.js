@@ -4,7 +4,7 @@ import Head from "next/head";
 import styles from "./styles/main.css"
 import SearchBar from "./components/SearchBar";
 import {useState} from "react";
-import SearchResults from "./components/SearchResults";
+import SearchResultsList from "./components/SearchResultsList";
 
 export default function Page() {
   const [results, setResults] = useState([]);
@@ -26,7 +26,7 @@ export default function Page() {
 
           <div className="search-bar-container">
             <SearchBar setResults={setResults}></SearchBar>
-            {results && results.length > 0 && <SearchResults results={results} />}
+            {results && results.length > 0 && <SearchResultsList results={results} />}
           </div>
 
         </main>
