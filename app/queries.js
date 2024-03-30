@@ -19,10 +19,10 @@ require("dotenv").config();
 //     return data;
 // }
 
-async function filterData(search_results, filters=[]) {
+export function filterData(search_results, filters=[]) {
     search_results.sort((function(a, b) {
-        a_score = 0;
-        b_score = 0;
+        let a_score = 0;
+        let b_score = 0;
         if (filters.length == 0) {
             a_score = a.pass_count / (a.pass_count + a.incomplete_count + a.violation_count);
             b_score = b.pass_count / (b.pass_count + b.incomplete_count + b.violation_count);

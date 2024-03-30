@@ -1,8 +1,7 @@
 "use client";
 import styles from "../styles/SearchBar.css";
-import { filterData } from "../queries.js";
+// import { filterData } from "../queries.js";
 import React, { useState } from "react";
-// import {SearchResults} from "/Users/jiagill/Documents/VSCode/IncluSite/app/components/SearchResults.js";
 
 export default function SearchBar({ setResults }) {
   const [input, setInput] = useState("");
