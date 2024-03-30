@@ -1,12 +1,42 @@
 "use client";
 import styles from "../styles/SearchBar.css";
+import { filterData } from "../queries.js";
 import React, { useState } from "react";
+// import {SearchResults} from "/Users/jiagill/Documents/VSCode/IncluSite/app/components/SearchResults.js";
 
-export default function SearchBar({setResults}) {
+export default function SearchBar({ setResults }) {
   const [input, setInput] = useState("");
-  const fetchData = (query) => {
-    // call api here
-    setResults([1, 2, 3]);
+  const fetchData = async (query) => {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const raw = JSON.stringify({
+      dataSource: "WAVEFedWebsiteData",
+      database: "AxeCoreData",
+      collection: "AxeCoreFormatted",
+      filter: {
+        url: {
+          $regex: query,
+        },
+      },
+    });
+
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch(
+      "https://us-east-2.aws.data.mongodb-api.com/app/data-ergdg/endpoint/data/v1/action/find",
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => {
+        setResults(result);
+      })
+      .catch((error) => console.error(error));
   };
   const handleChange = (value) => {
     setInput(value);
