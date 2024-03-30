@@ -1,8 +1,13 @@
+"use client";
+
 import Head from "next/head";
 import styles from "./styles/main.css"
 import SearchBar from "./components/SearchBar";
+import {useState} from "react";
+import SearchResults from "./components/SearchResults";
 
 export default function Page() {
+  const [results, setResults] = useState([]);
     return (
       <>
         <Head>
@@ -19,10 +24,10 @@ export default function Page() {
 
           </div>
 
-          <SearchBar></SearchBar>
-
-
-
+          <div className="search-bar-container">
+            <SearchBar setResults={setResults}></SearchBar>
+            {results && results.length > 0 && <SearchResults results={results} />}
+          </div>
 
         </main>
 
