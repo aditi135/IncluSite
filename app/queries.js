@@ -44,21 +44,21 @@ async function filterData(search_results, filters=[]) {
     return search_results;
 }
 
-async function main() {
-    const client = new MongoClient(process.env.MONGO_DB_URI);
-    var test_query = "usps";
-    try {
-        await client.connect();
+// async function main() {
+//     const client = new MongoClient(process.env.MONGO_DB_URI);
+//     var test_query = "usps";
+//     try {
+//         await client.connect();
 
-        var query_data = await searchData(client, test_query);  
-        query_data = filterData(query_data, ["color_contrast"]);
+//         var query_data = await searchData(client, test_query);  
+//         query_data = filterData(query_data, ["color_contrast"]);
 
-        console.log(query_data);
-    } catch (e) {
-        console.error(e);
-    } finally {
-        await client.close();
-    }
-}
+//         console.log(query_data);
+//     } catch (e) {
+//         console.error(e);
+//     } finally {
+//         await client.close();
+//     }
+// }
 
-main();
+// main();
