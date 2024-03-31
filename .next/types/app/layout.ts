@@ -1,4 +1,4 @@
-// File: C:\Users\reach\Desktop\IncluSite\app\layout.js
+// File: /Users/jiagill/Documents/VSCode/IncluSite/app/layout.js
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

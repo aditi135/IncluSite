@@ -18,8 +18,10 @@ export default function SearchBar({ setResults }) {
       collection: "AxeCoreFormatted",
       filter: { $or: [{url: {
         $regex: query,
+        $options: "i"
       }},{url_dom: {
         $regex: query,
+        $options: "i"
       }}
     ]
       },
