@@ -1,0 +1,5 @@
+---
+deployment:
+ tasks:
+ - export DEPLOYPATH=/home/inclusite/public_html/
+ - /bin/cp app/page.js $DEPLOYPATH

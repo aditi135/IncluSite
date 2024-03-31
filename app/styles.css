@@ -1,0 +1,8 @@
+.row {
+  display: flex;
+}
+
+.filters {
+  flex: 50%;
+  color: red;
+}
