@@ -42,12 +42,12 @@
   
   /* On mouse-over, add a grey background color */
   .Filters_checkboxes__9ssYb:hover input ~ .Filters_checkmark__R6NIS {
-    background-color: #ccc;
+    background-color: #8B624B;
   }
   
   /* When the checkbox is checked, add a blue background */
   .Filters_checkboxes__9ssYb input:checked ~ .Filters_checkmark__R6NIS {
-    background-color: #2196F3;
+    background-color: #8B624B;
   }
   
   /* Create the checkmark/indicator (hidden when not checked) */
@@ -112,10 +112,10 @@
   \******************************************************************************************************************************************************************************************************************************************************************************/
 .results-list {
     width: calc(100% - 2rem);
-    background-color: white;
+    background-color: #a3a894;
     display: flex;
     flex-direction: column;
-    box-shadow: 0.5rem 0.5rem #000000;
+    box-shadow: 0.5rem 0.5rem #424141;
     border-radius: 10px;
     /* margin-top: 1rem; */
     /* max-height: 300px; */
@@ -153,6 +153,7 @@
   box-sizing: border-box;
   border-radius: 2rem;
   height: 100%;
+  background-color: rgb(209, 203, 203);
 }
 
 .main_columns__CEmrq .main_left__Tew6w {

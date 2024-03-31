@@ -1,9 +1,9 @@
 .results-list {
     width: calc(100% - 2rem);
-    background-color: white;
+    background-color: #a3a894;
     display: flex;
     flex-direction: column;
-    box-shadow: 0.5rem 0.5rem #000000;
+    box-shadow: 0.5rem 0.5rem #424141;
     border-radius: 10px;
     /* margin-top: 1rem; */
     /* max-height: 300px; */
