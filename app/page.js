@@ -30,8 +30,6 @@ export default function Page() {
               {results && results.length > 0 && <SearchResultsList results={results} />}
             </div>
             <div className={`${styles.filters}`}>
-              <input type="checkbox" name="aria"></input>
-              <label for="aria">Arias</label>
             </div>
           </div>
 
