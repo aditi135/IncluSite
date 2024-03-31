@@ -30,7 +30,7 @@ export default function SearchResultsList(results) {
           {/* Passes: {data.pass_count} &nbsp; Incomplete passes: {data.incomplete_count} &nbsp; Violations: {data.violation_count} <br/> */}
           Overall Accessibility Score: <h3 class="large">{getScore(data)}</h3> <br/>
 
-          <a href={data.url_dom}>{data.url}</a> <br/>
+          <a href={data.url_dom} target="blank">{data.url}</a> <br/>
           <TagContainer
             screenReader={getScore(data, screen_reader)}
             textContrast={getScore(data, text_contrast)}
