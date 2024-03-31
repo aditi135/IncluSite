@@ -1,3 +1,4 @@
+import "../styles/SearchResultsList.css";
 import React from "react";
 import { filterData } from "../queries.js";
 
@@ -17,7 +18,7 @@ export default function SearchResultsList(results) {
   return (
     <>
       {pageItems.map(function (data) {
-        return <div key={data.url}>{data.url}</div>;
+        return <div key={data.url} className="results-list">{data.url}</div>;
       })}
     </>
   );

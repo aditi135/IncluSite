@@ -1,5 +1,8 @@
 "use client";
-import styles from "../styles/SearchBar.css";
+// import styles from "../styles/SearchBar.css";
+import "../styles/SearchBar.css";
+import { FaSearch } from "react-icons/fa";
+
 // import { filterData } from "../queries.js";
 import React, { useState } from "react";
 
@@ -13,10 +16,12 @@ export default function SearchBar({ setResults }) {
       dataSource: "WAVEFedWebsiteData",
       database: "AxeCoreData",
       collection: "AxeCoreFormatted",
-      filter: {
-        url: {
-          $regex: query,
-        },
+      filter: { $or: [{url: {
+        $regex: query,
+      }},{url_dom: {
+        $regex: query,
+      }}
+    ]
       },
     });
 
@@ -43,12 +48,14 @@ export default function SearchBar({ setResults }) {
   };
 
   return (
+    <div>
+    <FaSearch id="search-icon" />
     <input
       type="search"
       id="search"
       placeholder="Search"
       value={input}
       onChange={(e) => handleChange(e.target.value)}
-    />
+    /></div>
   );
 }
