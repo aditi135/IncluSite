@@ -1,6 +1,9 @@
 import "../styles/SearchResultsList.css";
 import React from "react";
 import { filterData, getScore } from "../queries.js";
+import Tag from "./Tag.js";
+import TagContainer from "./TagContainer.js"
+
 
 export default function SearchResultsList(results) {
   var pageItems = JSON.parse(results["results"])["documents"];
@@ -23,18 +26,18 @@ export default function SearchResultsList(results) {
         let closed_captioning = ["audio-caption"]
         let no_audio = ["no-autoplay-audio"]
         return <div key={data.url} className="results-list">
-          <a href={data.url_dom}>{data.url}</a>
-          <br/>
-          <b>WCAG Test Results</b>
-          Passes: {data.pass_count} &nbsp; Incomplete passes: {data.incomplete_count} &nbsp; Violations: {data.violation_count} <br/>
-          Overall Accessibility Score: {getScore(data)} <br/>
-          <b>Subscores: </b>
-          Visual<br/>
-          Screen-Reader Optimized: {getScore(data, screen_reader)}<br/>
-          Text Contrast: {getScore(data, text_contrast)}<br/>
-          Audio<br/>
-          Closed Captioning: {getScore(data, closed_captioning)}<br/>
-          No/Few Audio Clips: {getScore(data, no_audio)}<br/>
+          {/* <h3>WCAG Test Results</h3> */}
+          {/* Passes: {data.pass_count} &nbsp; Incomplete passes: {data.incomplete_count} &nbsp; Violations: {data.violation_count} <br/> */}
+          Overall Accessibility Score: <h3 class="large">{getScore(data)}</h3> <br/>
+
+          <a href={data.url_dom}>{data.url}</a> <br/>
+          <TagContainer
+            screenReader={getScore(data, screen_reader)}
+            textContrast={getScore(data, text_contrast)}
+            closedCaptions={getScore(data, closed_captioning)}
+            noAudio={getScore(data, no_audio)}
+          />
+
         </div>;
       })}
     </>
