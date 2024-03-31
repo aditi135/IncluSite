@@ -1,0 +1,26 @@
+/*!*******************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./app/styles/layout.css ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************/
+body {
+    font-family: Verdana, sans-serif;
+    background-color: #a3a894;
+    color: black;
+    
+    /* margin: 0;
+    padding: 0; */
+  
+    background-image: url(/_next/static/media/background.c4bf4ddf.png);
+    background-position: center center;
+    background-size: cover;
+    background-size: 75%;
+    width: 100%;
+    text-align: center;
+}
+  
+h1 {
+   text-align: center;
+   font-size: 3em;
+   padding-top: 1rem;
+}
+
+
