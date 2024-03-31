@@ -2,6 +2,7 @@
 
 import Head from "next/head";
 import styles from "./styles/main.css"
+import FilterBox from "./components/FilterBox";
 import SearchBar from "./components/SearchBar";
 import {useState} from "react";
 import SearchResultsList from "./components/SearchResultsList";
@@ -27,6 +28,19 @@ export default function Page() {
           <div className="search-bar-container">
             <SearchBar setResults={setResults}></SearchBar>
             {results && results.length > 0 && <SearchResultsList results={results} />}
+          </div>
+          <div>
+            <h2>Filter for Accessibility Features</h2>
+
+            <FilterBox text="Arias, Image Descriptions, and Screen-reader Support"></FilterBox>
+            {/* <input type="checkbox" value="visual"></input>
+            <label for="aria">Arias, Image Descriptions, and Screen-reader Support</label>
+
+            <input type="checkbox" value="audio"></input>
+            <label for="audio">Video Captioning</label>
+
+            <input type="checkbox" value="lowvision"></input>
+            <label for="lowvision">Text and Color Contrast</label> */}
           </div>
 
         </main>
