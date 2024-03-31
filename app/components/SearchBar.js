@@ -16,12 +16,19 @@ export default function SearchBar({ setResults }) {
       dataSource: "WAVEFedWebsiteData",
       database: "AxeCoreData",
       collection: "AxeCoreFormatted",
-      filter: { $or: [{url: {
-        $regex: query,
-      }},{url_dom: {
-        $regex: query,
-      }}
-    ]
+      filter: {
+        $or: [
+          {
+            url: {
+              $regex: query,
+            },
+          },
+          {
+            url_dom: {
+              $regex: query,
+            },
+          },
+        ],
       },
     });
 
@@ -49,13 +56,14 @@ export default function SearchBar({ setResults }) {
 
   return (
     <div>
-    <FaSearch id="search-icon" />
-    <input
-      type="search"
-      id="search"
-      placeholder="Search"
-      value={input}
-      onChange={(e) => handleChange(e.target.value)}
-    /></div>
+      <FaSearch id="search-icon" />
+      <input
+        type="search"
+        id="search"
+        placeholder="Search"
+        value={input}
+        onChange={(e) => handleChange(e.target.value)}
+      />
+    </div>
   );
 }
