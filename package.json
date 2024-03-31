@@ -10,11 +10,12 @@
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
     "selenium-webdriver": "^4.19.0"
-  },
+  },  
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "NODE_ENV=production node server.js"
   }
+
+  
 }
