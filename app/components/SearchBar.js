@@ -16,10 +16,12 @@ export default function SearchBar({ setResults }) {
       dataSource: "WAVEFedWebsiteData",
       database: "AxeCoreData",
       collection: "AxeCoreFormatted",
-      filter: {
-        url: {
-          $regex: query,
-        },
+      filter: { $or: [{url: {
+        $regex: query,
+      }},{url_dom: {
+        $regex: query,
+      }}
+    ]
       },
     });
 
