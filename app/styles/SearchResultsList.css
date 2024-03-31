@@ -10,4 +10,33 @@
     /* overflow-y: auto; */
     margin-bottom: 1rem;
     padding: 1rem;
+    text-align: left;
+    margin-left: ;
   }
+
+.left {
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+}
+
+.large {
+  font-size: 3rem;
+  margin: 0;
+  text-align: left;
+}
+
+a {
+  color: #3c5b66; /* Change the color of the link */
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+a:hover {
+  text-decoration: none; /* Add underline on hover */
+  color: #866c80;
+  font-weight: bold;
+  font-size: 1.5rem;
+}

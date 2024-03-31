@@ -1,0 +1,12 @@
+.container {
+    background-color: white;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 1rem;
+    box-shadow: 0.2rem 0.2rem #424141;
+
+}
+
+.tag {
+    margin: 0.5rem;
+}
