@@ -71,7 +71,7 @@ export default function Page() {
         </p>
         <p>
           <a href="mailto:aditiak4@illinois.edu?cc=jiasg2@illinois.edu&subject=IncluSITE%20Project%20Feedback">
-            aditiak4@illinos.edu
+            aditiak4@illinois.edu
           </a>
           <br />
           <a href="mailto:jiasg2@illinois.edu?cc=aditiak4@illinois.edu&subject=IncluSITE%20Project%20Feedback">
